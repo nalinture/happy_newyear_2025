@@ -1,13 +1,12 @@
-terraform {
-      backend "remote" {
-         # The name of your Terraform Cloud organization.
-         organization = "aws_lambda"
+terraform { 
+  cloud { 
+    
+    organization = "newyear" 
 
-         # The name of the Terraform Cloud workspace to store Terraform state files in.
-         workspaces {
-           name = "terraform_tutorial"
-         }
-     }
+    workspaces { 
+      name = "newyear" 
+    } 
+  } 
 }
 
 provider "aws" {
