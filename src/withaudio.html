@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy New Year Button Animation</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #141e30, #243b55);
+      font-family: "Arial", sans-serif;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .btn {
+      padding: 15px 30px;
+      font-size: 18px;
+      color: #fff;
+      background: #ff6f61;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #ff3d3d;
+    }
+
+    .new-year {
+      opacity: 0;
+      transform: scale(0.8);
+      animation: none;
+      display: none;
+    }
+
+    .new-year.active {
+      display: block;
+      opacity: 1;
+      transform: scale(1);
+      animation: fadeInScale 1s ease forwards;
+    }
+
+    .new-year h1 {
+      font-size: 50px;
+      color: #fff;
+      text-shadow: 0 0 10px #ff0066, 0 0 20px #ff3399, 0 0 30px #ff66cc;
+      animation: glow 1.5s infinite alternate;
+    }
+
+    .new-year p {
+      font-size: 20px;
+      color: #fff;
+      margin: 10px 0;
+    }
+
+    .fireworks {
+      position: relative;
+      margin: 30px auto;
+      width: 200px;
+      height: 200px;
+    }
+
+    .firework {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.8);
+      animation: fireworkExplode 2s ease-in-out infinite;
+    }
+
+    .firework:nth-child(1) {
+      left: 30%;
+      top: 20%;
+      background: #ff6f61;
+      animation-delay: 0s;
+    }
+
+    .firework:nth-child(2) {
+      left: 70%;
+      top: 30%;
+      background: #4caf50;
+      animation-delay: 0.5s;
+    }
+
+    .firework:nth-child(3) {
+      left: 50%;
+      top: 70%;
+      background: #ffd700;
+      animation-delay: 1s;
+    }
+
+    .firework:nth-child(4) {
+      left: 20%;
+      top: 60%;
+      background: #03a9f4;
+      animation-delay: 1.5s;
+    }
+
+    .firework:nth-child(5) {
+      left: 80%;
+      top: 40%;
+      background: #e91e63;
+      animation-delay: 2s;
+    }
+
+    @keyframes glow {
+      0% {
+        text-shadow: 0 0 10px #ff0066, 0 0 20px #ff3399, 0 0 30px #ff66cc;
+      }
+      100% {
+        text-shadow: 0 0 20px #ff3399, 0 0 30px #ff66cc, 0 0 40px #ff99ff;
+      }
+    }
+
+    @keyframes fadeInScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fireworkExplode {
+      0% {
+        transform: scale(0.5) translateY(0);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1) translateY(-50px);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(0.5) translateY(-100px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Audio element for background music -->
+  <audio id="backgroundMusic" autoplay loop>
+    <source src="your-music-file.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="container">
+    <button class="btn" onclick="showNewYear()">Celebrate New Year</button>
+    <div class="new-year" id="newYear">
+      <h1>Happy New Year 2025!</h1>
+      <p>Wishing you a year full of joy, prosperity, and endless opportunities.</p>
+      <div class="fireworks">
+        <div class="firework"></div>
+        <div class="firework"></div>
+        <div class="firework"></div>
+        <div class="firework"></div>
+        <div class="firework"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Play background music if autoplay is blocked by the browser
+    const audio = document.getElementById('backgroundMusic');
+    document.addEventListener('DOMContentLoaded', () => {
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // If autoplay is blocked, add a click listener to enable it
+          document.body.addEventListener('click', () => {
+            audio.play();
+          }, { once: true });
+        });
+      }
+    });
+
+    function showNewYear() {
+      const newYearElement = document.getElementById('newYear');
+      newYearElement.classList.add('active');
+    }
+  </script>
+</body>
+
+</html>
