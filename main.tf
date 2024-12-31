@@ -19,8 +19,8 @@ data "aws_s3_bucket" "bucket" {
 
 resource "aws_s3_bucket_object" "object" {
   bucket = data.aws_s3_bucket.bucket.id
-  key    = "behappy.html"
-  source = "${path.module}/src/behappy.html"
+  key    = "withaudio.html"
+  source = "${path.module}/src/withaudio.html"
   acl = "public-read"
   content_type = "text/html"
 }
@@ -29,7 +29,7 @@ resource "aws_s3_bucket_website_configuration" "webconfig" {
   bucket = data.aws_s3_bucket.bucket.id
 
   index_document {
-    suffix = "behappy.html"
+    suffix = "withaudio.html"
   }
 
 }
