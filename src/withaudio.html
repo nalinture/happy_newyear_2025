@@ -175,24 +175,33 @@
   </div>
 
   <script>
-    // Play background music if autoplay is blocked by the browser
+  document.addEventListener('DOMContentLoaded', () => {
     const audio = document.getElementById('backgroundMusic');
-    document.addEventListener('DOMContentLoaded', () => {
+    const button = document.querySelector('.btn');
+    
+    // Attach a click event to start the music and show the celebration
+    button.addEventListener('click', () => {
       const playPromise = audio.play();
+      
+      // Handle browser's promise-based play
       if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // If autoplay is blocked, add a click listener to enable it
-          document.body.addEventListener('click', () => {
-            audio.play();
-          }, { once: true });
-        });
+        playPromise
+          .then(() => {
+            console.log('Audio is playing.');
+          })
+          .catch((error) => {
+            console.error('Autoplay prevented:', error);
+          });
       }
+      
+      showNewYear(); // Trigger the New Year animation
     });
+  });
 
-    function showNewYear() {
-      const newYearElement = document.getElementById('newYear');
-      newYearElement.classList.add('active');
-    }
+  function showNewYear() {
+    const newYearElement = document.getElementById('newYear');
+    newYearElement.classList.add('active');
+  }
   </script>
 </body>
 
