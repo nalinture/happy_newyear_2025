@@ -4,7 +4,7 @@ terraform {
     organization = "newyear" 
 
     workspaces { 
-      name = "newyear" 
+      name = "happy_newyear_2025" 
     } 
   } 
 }
@@ -14,23 +14,22 @@ provider "aws" {
 }
 
 data "aws_s3_bucket" "bucket" {
-  bucket = "birthdaybucket05"
+  bucket = "happynewyear2025"
 }
 
 resource "aws_s3_bucket_object" "object" {
-  for_each = fileset("./", "*")
   bucket = data.aws_s3_bucket.bucket.id
-  key    = each.value
-  source = "./${each.value}"
+  key    = "behappy.html"
+  source = "${path.module}/src/behappy.html"
   acl = "public-read"
-  etag   = filemd5("./${each.value}")
+  content_type = "text/html"
 }
 
 resource "aws_s3_bucket_website_configuration" "webconfig" {
   bucket = data.aws_s3_bucket.bucket.id
 
   index_document {
-    suffix = "smile.html"
+    suffix = "behappy.html"
   }
 
 }
